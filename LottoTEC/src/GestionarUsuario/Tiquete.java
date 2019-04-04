@@ -5,63 +5,48 @@ import Estructuras.DoublyLinkedList;
 
 public class Tiquete {
     private String nombreEmisor;
-    private String nombreCliente;
-    private String tipoSorteo;
+    private Usuario usuario;
+    private SorteosFuturos sorteo;
     private DoublyLinkedList numeroSorteo;
-    private int precio;
 
-    public Tiquete(String nombreEmisor, String nombreCliente, String tipoSorteo, DoublyLinkedList numeroSorteo, int precio) {
+    public Tiquete(String nombreEmisor, Usuario usuario, SorteosFuturos sorteo, DoublyLinkedList numeroSorteo) {
         this.nombreEmisor = nombreEmisor;
-        this.nombreCliente = nombreCliente;
-        this.tipoSorteo = tipoSorteo;
+        this.usuario = usuario;
+        this.sorteo = sorteo;
         this.numeroSorteo = numeroSorteo;
-        this.precio = precio;
     }
 
     public String getNombreEmisor() {
         return nombreEmisor;
     }
 
-    public String getNombreCliente() {
-        return nombreCliente;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public String getTipoSorteo() {
-        return tipoSorteo;
+    public SorteosFuturos getSorteo() {
+        return sorteo;
     }
 
     public DoublyLinkedList getNumeroSorteo() {
         return numeroSorteo;
     }
 
-    public int getPrecio() {
-        return precio;
-    }
-
     public void setNombreEmisor(String nombreEmisor) {
         this.nombreEmisor = nombreEmisor;
     }
 
-    public void setNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public void setTipoSorteo(String tipoSorteo) {
-        this.tipoSorteo = tipoSorteo;
+    public void setSorteo(SorteosFuturos sorteo) {
+        this.sorteo = sorteo;
     }
 
     public void setNumeroSorteo(DoublyLinkedList numeroSorteo) {
         this.numeroSorteo = numeroSorteo;
     }
-
-    public void setPrecio(int precio) {
-        this.precio = precio;
-    }
-    
-    
     
     
 }
-
-
-

@@ -1,36 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Sorteos;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
 
-/**
- *
- * @author Dylan
- */
-public class Lotto {
-    private GregorianCalendar cal;
+public class Lotto<X> extends AbstractSorteo {
 
-    public Lotto(int anno, int mes, int dia) {
-        GregorianCalendar calTemp=new GregorianCalendar(anno+1900, mes-1, dia);
-        this.cal=calTemp;
+    public Lotto(String nombreSorteo, int codigoSorteo, int anno, int mes, int dia) {
+        super(nombreSorteo, codigoSorteo, anno, mes, dia);
+        //se agrega a la lista los 7 numeros ganadores
+        for(int i=0; i<7; i++){
+            super.getNumeroGanador().insert((int) Math.floor(Math.random()*10));
+        }
     }
 
-    public GregorianCalendar getCal() {
-        return cal;
+    @Override
+    public void emitirGanador() {
     }
     
-    
 
-    
-    
-    
-    
-    
-    
     
 }

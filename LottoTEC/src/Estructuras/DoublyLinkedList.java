@@ -88,6 +88,22 @@ public class DoublyLinkedList<X>{
         }
         return temp.getElement();
     }
+    
+    
+    public DoublyLinkedList consultAll(X element) {
+        DoublyLinkedNode<X> temp = head;
+        DoublyLinkedList aux=new DoublyLinkedList();
+        for (int i = 0; i < size; i++) {
+            if (temp.getElement() == element) {
+                aux.insert(element);
+            }
+            else {
+                temp = temp.getNext();
+            }
+        }
+        return aux;
+    }    
+    
 
     /**
      * Permite actualizar cualquier elemento de la lista
@@ -226,7 +242,7 @@ public class DoublyLinkedList<X>{
         String msg = "";
         DoublyLinkedNode<X> temp = head;
         for (int i = 0; i < size; i++) {
-            msg += temp.toString() + "\n";
+            msg += temp.toString();
             temp = temp.getNext();
         }
         return msg;
@@ -241,7 +257,7 @@ public class DoublyLinkedList<X>{
         String msg = "";
         DoublyLinkedNode<X> temp = tail;
         for (int i = 0; i < size; i++) {
-            msg += temp.toString() + "\n";
+            msg += temp.toString() + "   ";
             temp = temp.getPrev();
         }
         return msg;

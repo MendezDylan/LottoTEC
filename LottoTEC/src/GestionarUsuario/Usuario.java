@@ -2,27 +2,28 @@
 package GestionarUsuario;
 
 import Estructuras.DoublyLinkedList;
-import Estructuras.DoublyLinkedNode;
+import java.util.GregorianCalendar;
 
 
 public class Usuario<X> {
     private String nombre;
     private String cedula;
-    private String fechaNacimiento;
+    private GregorianCalendar fechaNacimiento;
     private String direccion;
     private String telefono;
     private String correo;
     private DoublyLinkedList<X> pedidosTiquetes;
 
-    public Usuario(String nombre, String cedula, String fechaNacimiento, String direccion, String telefono, String correo) {
+    public Usuario(String nombre, String cedula, GregorianCalendar fechaNacimiento, String direccion, String telefono, String correo) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.fechaNacimiento = fechaNacimiento;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
-        this.pedidosTiquetes=new DoublyLinkedList<>();
     }
+
+
 
     public String getNombre() {
         return nombre;
@@ -32,7 +33,7 @@ public class Usuario<X> {
         return cedula;
     }
 
-    public String getFechaNacimiento() {
+    public GregorianCalendar getFechaNacimiento() {
         return fechaNacimiento;
     }
 
@@ -60,9 +61,10 @@ public class Usuario<X> {
         this.cedula = cedula;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(GregorianCalendar fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
@@ -82,8 +84,10 @@ public class Usuario<X> {
 
     @Override
     public String toString() {
-        return "Usuario{" + "nombre=" + nombre + ", cedula=" + cedula + ", fechaNacimiento=" + fechaNacimiento + ", direccion=" + direccion + ", telefono=" + telefono + ", correo=" + correo + ", pedidosTiquetes=" + pedidosTiquetes + '}';
+        return "Usuario{" + "nombre=" + nombre + ", cedula=" + cedula + ", fechaNacimiento=" + fechaNacimiento.getTime().toString() + ", direccion=" + direccion + ", telefono=" + telefono + ", correo=" + correo + ", pedidosTiquetes=" + pedidosTiquetes + '}';
     }
+
+
     
     
     

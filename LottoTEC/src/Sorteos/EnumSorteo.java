@@ -10,9 +10,15 @@ package Sorteos;
  * @author Dylan
  */
 public enum EnumSorteo {
-    LOTERIA(0, "Loteria"), LOTTO(1,"Lotto"), BINGO(2,"Bingo"), TIEMPOS(3,"Tiempos");
+    LOTERIA(0, "Loteria"), 
+    LOTTO(1,"Lotto"), 
+    BINGO(2,"Bingo"), 
+    TIEMPOS(3,"Tiempos");
+    
+    
     private int codigoSorteo;
     private String descripcionSorteo;
+
 
     public int getCodigoSorteo() {
         return codigoSorteo;
@@ -33,9 +39,6 @@ public enum EnumSorteo {
     private EnumSorteo(int codigoSorteo, String descripcionSorteo) {
         this.codigoSorteo = codigoSorteo;
         this.descripcionSorteo = descripcionSorteo;
-    }
-    
-    
-    
+    }   
     
 }

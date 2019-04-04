@@ -51,7 +51,7 @@ public class DoublyLinkedNode<X> {
      */
     @Override
     public String toString() {
-        return "element=" + element;
+        return "element=" + element+"\n";
     }
 
 }
