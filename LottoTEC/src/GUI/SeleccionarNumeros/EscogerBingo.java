@@ -7,6 +7,7 @@
 package GUI.SeleccionarNumeros;
 
 import Estructuras.DoublyLinkedList;
+import javax.swing.JLabel;
 
 /**
  *
@@ -17,14 +18,14 @@ public class EscogerBingo extends javax.swing.JDialog {
 
     /** Creates new form Bingo */
     DoublyLinkedList<Integer> numerosGanadores;
-
-    public EscogerBingo(java.awt.Frame parent, boolean modal, DoublyLinkedList<Integer> numerosGanadores) {
+    JLabel numerosEscogidos;
+    public EscogerBingo(java.awt.Frame parent, boolean modal, DoublyLinkedList<Integer> numerosGanadores, JLabel numerosEscogidos) {
         super(parent, modal);
         initComponents();
         for(int i=0;i<10;i++){
             comboNumBingo.addItem(Integer.toString(i));
             comboNumBingo1.addItem(Integer.toString(i));
-            comboNumBingo2.addItem(Integer.toString(i));
+            comboNumBingo9.addItem(Integer.toString(i));
             comboNumBingo3.addItem(Integer.toString(i));
             comboNumBingo4.addItem(Integer.toString(i));
             comboNumBingo5.addItem(Integer.toString(i));
@@ -33,6 +34,7 @@ public class EscogerBingo extends javax.swing.JDialog {
             comboNumBingo8.addItem(Integer.toString(i));
         }
         this.numerosGanadores=numerosGanadores;
+        this.numerosEscogidos=numerosEscogidos;
     }
 
     /** This method is called from within the constructor to
@@ -76,6 +78,12 @@ public class EscogerBingo extends javax.swing.JDialog {
             }
         });
 
+        comboNumBingo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboNumBingo1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,7 +115,7 @@ public class EscogerBingo extends javax.swing.JDialog {
                                 .addComponent(comboNumBingo8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(comboNumBingo9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,15 +149,20 @@ public class EscogerBingo extends javax.swing.JDialog {
         // TODO add your handling code here:
         numerosGanadores.insert(Integer.parseInt((String) comboNumBingo.getSelectedItem()));
         numerosGanadores.insert(Integer.parseInt((String) comboNumBingo1.getSelectedItem()));
-        numerosGanadores.insert(Integer.parseInt((String) comboNumBingo2.getSelectedItem()));
+        numerosGanadores.insert(Integer.parseInt((String) comboNumBingo9.getSelectedItem()));
         numerosGanadores.insert(Integer.parseInt((String) comboNumBingo3.getSelectedItem()));
         numerosGanadores.insert(Integer.parseInt((String) comboNumBingo4.getSelectedItem()));
         numerosGanadores.insert(Integer.parseInt((String) comboNumBingo5.getSelectedItem()));
         numerosGanadores.insert(Integer.parseInt((String) comboNumBingo6.getSelectedItem()));
         numerosGanadores.insert(Integer.parseInt((String) comboNumBingo7.getSelectedItem()));
         numerosGanadores.insert(Integer.parseInt((String) comboNumBingo8.getSelectedItem()));
+        numerosEscogidos.setText(numerosGanadores.toString());
         dispose();
     }//GEN-LAST:event_botonAceptarActionPerformed
+
+    private void comboNumBingo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNumBingo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboNumBingo1ActionPerformed
 
     /**
      * @param args the command line arguments

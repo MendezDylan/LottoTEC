@@ -1,27 +1,30 @@
 
 package GestionarUsuario;
 
-import Estructuras.DoublyLinkedList;
+import Estructuras.PriorityQueue;
 import java.util.GregorianCalendar;
 
 
 public class Usuario<X> {
     private String nombre;
-    private String cedula;
+    private int cedula;
     private GregorianCalendar fechaNacimiento;
     private String direccion;
     private String telefono;
     private String correo;
-    private DoublyLinkedList<X> pedidosTiquetes;
+    private PriorityQueue<X> pedidosTiquetes;
 
-    public Usuario(String nombre, String cedula, GregorianCalendar fechaNacimiento, String direccion, String telefono, String correo) {
+    public Usuario(String nombre, int cedula, GregorianCalendar fechaNacimiento, String direccion, String telefono, String correo) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.fechaNacimiento = fechaNacimiento;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
+        this.pedidosTiquetes=new PriorityQueue<>();
     }
+    
+    
 
 
 
@@ -29,7 +32,7 @@ public class Usuario<X> {
         return nombre;
     }
 
-    public String getCedula() {
+    public int getCedula() {
         return cedula;
     }
 
@@ -49,7 +52,7 @@ public class Usuario<X> {
         return correo;
     }
 
-    public DoublyLinkedList<X> getPedidosTiquetes() {
+    public PriorityQueue<X> getPedidosTiquetes() {
         return pedidosTiquetes;
     }
 
@@ -57,7 +60,7 @@ public class Usuario<X> {
         this.nombre = nombre;
     }
 
-    public void setCedula(String cedula) {
+    public void setCedula(int cedula) {
         this.cedula = cedula;
     }
 
@@ -78,14 +81,18 @@ public class Usuario<X> {
         this.correo = correo;
     }
 
-    public void setPedidosTiquetes(DoublyLinkedList<X> pedidosTiquetes) {
+    public void setPedidosTiquetes(PriorityQueue<X> pedidosTiquetes) {
         this.pedidosTiquetes = pedidosTiquetes;
     }
 
     @Override
     public String toString() {
-        return "Usuario{" + "nombre=" + nombre + ", cedula=" + cedula + ", fechaNacimiento=" + fechaNacimiento.getTime().toString() + ", direccion=" + direccion + ", telefono=" + telefono + ", correo=" + correo + ", pedidosTiquetes=" + pedidosTiquetes + '}';
+        return "Usuario{" + "nombre=" + nombre + ", cedula=" + cedula + ", fechaNacimiento=" + fechaNacimiento.getTime() + ", direccion=" + direccion + ", telefono=" + telefono + ", correo=" + correo + ", pedidosTiquetes=" + '}';
     }
+
+    
+    
+    
 
 
     

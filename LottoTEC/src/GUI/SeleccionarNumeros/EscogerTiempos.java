@@ -6,6 +6,7 @@
 package GUI.SeleccionarNumeros;
 
 import Estructuras.DoublyLinkedList;
+import javax.swing.JLabel;
 
 /**
  *
@@ -16,8 +17,9 @@ public class EscogerTiempos extends javax.swing.JDialog {
     /**
      * Creates new form Tiempos
      */
+    JLabel numerosEscogidos;
     DoublyLinkedList<Integer> numerosGanadores;
-    public EscogerTiempos(java.awt.Frame parent, boolean modal, DoublyLinkedList<Integer> numerosGanadores) {
+    public EscogerTiempos(java.awt.Frame parent, boolean modal, DoublyLinkedList<Integer> numerosGanadores,JLabel numerosEscogidos) {
         super(parent, modal);
         initComponents();
         for(int i=0;i<100;i++){
@@ -25,6 +27,7 @@ public class EscogerTiempos extends javax.swing.JDialog {
             comboJugada.addItem(Integer.toString(i));
         }
         this.numerosGanadores=numerosGanadores;
+        this.numerosEscogidos=numerosEscogidos;
     }
 
     /**
@@ -134,6 +137,7 @@ public class EscogerTiempos extends javax.swing.JDialog {
         // TODO add your handling code here:
         numerosGanadores.insert(Integer.parseInt((String) comboPrincipal.getSelectedItem()));
         numerosGanadores.insert(Integer.parseInt((String) comboJugada.getSelectedItem()));
+        numerosEscogidos.setText(numerosGanadores.toString());
         dispose();
     }//GEN-LAST:event_botonAceptarActionPerformed
 

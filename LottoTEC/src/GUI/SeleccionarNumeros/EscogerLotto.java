@@ -6,6 +6,7 @@
 package GUI.SeleccionarNumeros;
 
 import Estructuras.DoublyLinkedList;
+import javax.swing.JLabel;
 
 /**
  *
@@ -16,8 +17,9 @@ public class EscogerLotto extends javax.swing.JDialog {
     /**
      * Creates new form Lotto
      */
+    JLabel numerosEscogidos;
     DoublyLinkedList<Integer> numerosGanadores;
-    public EscogerLotto(java.awt.Frame parent, boolean modal, DoublyLinkedList<Integer> numerosGanadores) {
+    public EscogerLotto(java.awt.Frame parent, boolean modal, DoublyLinkedList<Integer> numerosGanadores,JLabel numerosEscogidos) {
         super(parent, modal);
         initComponents();
         for(int i=0;i<10;i++){
@@ -30,6 +32,7 @@ public class EscogerLotto extends javax.swing.JDialog {
             comboNumLotto6.addItem(Integer.toString(i));
         }
         this.numerosGanadores=numerosGanadores;
+        this.numerosEscogidos=numerosEscogidos;
     }
 
     /**
@@ -163,6 +166,7 @@ public class EscogerLotto extends javax.swing.JDialog {
         numerosGanadores.insert(Integer.parseInt((String) comboNumLotto4.getSelectedItem()));
         numerosGanadores.insert(Integer.parseInt((String) comboNumLotto5.getSelectedItem()));
         numerosGanadores.insert(Integer.parseInt((String) comboNumLotto6.getSelectedItem()));
+        numerosEscogidos.setText(numerosGanadores.toString());
         dispose();
     }//GEN-LAST:event_botonAceptarActionPerformed
 

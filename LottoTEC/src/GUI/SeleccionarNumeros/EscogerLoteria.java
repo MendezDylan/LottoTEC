@@ -6,6 +6,8 @@
 package GUI.SeleccionarNumeros;
 
 import Estructuras.DoublyLinkedList;
+import GUI.ComprarTiquete;
+import javax.swing.JLabel;
 
 /**
  *
@@ -17,13 +19,15 @@ public class EscogerLoteria extends javax.swing.JDialog {
      * Creates new form Loteria
      */
     DoublyLinkedList<Integer> numerosGanadores;
-    public EscogerLoteria(java.awt.Frame parent, boolean modal, DoublyLinkedList<Integer> numerosGanadores) {
+    JLabel numerosEscogidos;
+    public EscogerLoteria(java.awt.Frame parent, boolean modal, DoublyLinkedList<Integer> numerosGanadores, JLabel numerosEscogidos) {
         super(parent, modal);
         initComponents();
         for(int i=0;i<100;i++){
             comboNumLoteria.addItem(Integer.toString(i));
         }
         this.numerosGanadores=numerosGanadores;
+        this.numerosEscogidos=numerosEscogidos;
     }
 
     /**
@@ -95,6 +99,8 @@ public class EscogerLoteria extends javax.swing.JDialog {
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         // TODO add your handling code here:
         numerosGanadores.insert(Integer.parseInt((String) comboNumLoteria.getSelectedItem()));
+        numerosEscogidos.setText(numerosGanadores.toString());
+        
         dispose();
     }//GEN-LAST:event_botonAceptarActionPerformed
 

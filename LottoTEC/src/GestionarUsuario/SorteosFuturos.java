@@ -7,12 +7,24 @@ public class SorteosFuturos {
     private String tipoSorteo;
     private GregorianCalendar fechaSorteo;
     private int precio;
+    int consecutivo;
+    private static int i=0;
 
     public SorteosFuturos(String tipoSorteo, GregorianCalendar fechaSorteo, int precio) {
         this.tipoSorteo = tipoSorteo;
         this.fechaSorteo = fechaSorteo;
         this.precio = precio;
+        this.consecutivo = SorteosFuturos.i++;
     }
+
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
+    }
+
 
     public String getTipoSorteo() {
         return tipoSorteo;
@@ -36,6 +48,11 @@ public class SorteosFuturos {
 
     public void setPrecio(int precio) {
         this.precio = precio;
+    }
+
+    @Override
+    public String toString() {
+        return "tipoSorteo=" + tipoSorteo + ", fechaSorteo=" + fechaSorteo.getTime() + ", precio=" + precio + ", consecutivo=" + consecutivo + '}';
     }
     
     

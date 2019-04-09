@@ -19,11 +19,10 @@ public abstract class AbstractSorteo<X> {
     private GregorianCalendar fechaSorteo;
     private DoublyLinkedList<X> numeroGanador;
 
-    public AbstractSorteo(String nombreSorteo, int codigoSorteo, int anno, int mes, int dia) {
+    public AbstractSorteo(String nombreSorteo, int codigoSorteo,GregorianCalendar fechaSorteo) {
         this.nombreSorteo=nombreSorteo;
         this.codigoSorteo=codigoSorteo;
-        GregorianCalendar tempDate=new GregorianCalendar(anno, mes-1, dia);
-        this.fechaSorteo=tempDate;
+        this.fechaSorteo=fechaSorteo;
         numeroGanador=new DoublyLinkedList<>();
     }
 

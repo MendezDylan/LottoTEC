@@ -47,6 +47,11 @@ public class Tiquete {
     public void setNumeroSorteo(DoublyLinkedList numeroSorteo) {
         this.numeroSorteo = numeroSorteo;
     }
+
+    @Override
+    public String toString() {
+        return "Tiquete{" + "nombreEmisor=" + nombreEmisor + ", usuario=" + usuario.toString() + ", sorteo=" + sorteo.toString() + ", numeroSorteo=" + numeroSorteo.toString() + '}';
+    }
     
     
 }

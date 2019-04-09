@@ -7,12 +7,19 @@ package GUI;
 
 import Estructuras.DoublyLinkedList;
 import Estructuras.DoublyLinkedNode;
+import Estructuras.PriorityQueue;
 import Estructuras.QueueNode;
 import GestionarUsuario.SorteosFuturos;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
+import org.joda.time.DateTimeComparator;
 
 /**
  *
@@ -23,12 +30,26 @@ public class GestionDeSorteos extends javax.swing.JDialog {
     /**
      * Creates new form GestionDeSorteos
      */
-    DoublyLinkedList<SorteosFuturos> listaDeSorteosPendientes;
-    public GestionDeSorteos(java.awt.Frame parent, boolean modal, DoublyLinkedList<SorteosFuturos> listaDeSorteosPendientes) {
+    PriorityQueue<SorteosFuturos> listaDeSorteosPendientes;
+    GregorianCalendar fechaDelSistema;
+    public GestionDeSorteos(java.awt.Frame parent, boolean modal, PriorityQueue<SorteosFuturos> listaDeSorteosPendientes, GregorianCalendar fechaDelSistema) {
         super(parent, modal);
-        initComponents();
-        this.listaDeSorteosPendientes=listaDeSorteosPendientes;
-        agregarDatosTabla();
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            initComponents();
+            this.listaDeSorteosPendientes=listaDeSorteosPendientes;
+            agregarDatosTabla();
+            this.fechaDelSistema=fechaDelSistema;        
+            labelFecha.setText(fechaDelSistema.getDisplayName(7, 2, Locale.ENGLISH)+", "+fechaDelSistema.get(5)+"-"+fechaDelSistema.getDisplayName(2, 2, Locale.ENGLISH)+"-"+fechaDelSistema.get(1));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionDeSorteos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(GestionDeSorteos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(GestionDeSorteos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(GestionDeSorteos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -53,6 +74,7 @@ public class GestionDeSorteos extends javax.swing.JDialog {
         tablaSorteosPendientes = new javax.swing.JTable();
         agregarSorteoPendiente = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        labelFecha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,7 +97,7 @@ public class GestionDeSorteos extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Sorteo", "Fecha", "Precio"
+                "Sorteo", "Fecha", "Precio", "ID"
             }
         ));
         jScrollPane1.setViewportView(tablaSorteosPendientes);
@@ -86,6 +108,8 @@ public class GestionDeSorteos extends javax.swing.JDialog {
                 agregarSorteoPendienteActionPerformed(evt);
             }
         });
+
+        labelFecha.setText("FECHA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,12 +133,15 @@ public class GestionDeSorteos extends javax.swing.JDialog {
                             .addComponent(textPrecio)
                             .addComponent(comboSorteos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(41, 41, 41)
-                        .addComponent(agregarSorteoPendiente))
+                        .addComponent(agregarSorteoPendiente)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(266, 266, 266)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelFecha)
+                        .addGap(76, 76, 76))))
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
@@ -124,7 +151,9 @@ public class GestionDeSorteos extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(labelFecha))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -150,12 +179,22 @@ public class GestionDeSorteos extends javax.swing.JDialog {
 
     private void agregarSorteoPendienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarSorteoPendienteActionPerformed
         // TODO add your handling code here:
-        Date date=textFecha.getDatoFecha();
-        GregorianCalendar fechaSorteo=new GregorianCalendar();
-        fechaSorteo.setTime(date);
-        SorteosFuturos nuevoSorteo=new SorteosFuturos(comboSorteos.getSelectedItem().toString(), fechaSorteo, Integer.parseInt(textPrecio.getText().toString()));
-        listaDeSorteosPendientes.insert(nuevoSorteo);
-        agregarDatosTabla();
+        if (textPrecio.getText().length()!=0 && textFecha.getDatoFecha()!=null){
+            Date date=textFecha.getDatoFecha();
+            if(DateTimeComparator.getDateOnlyInstance().compare(date, fechaDelSistema.getTime())==0 || DateTimeComparator.getDateOnlyInstance().compare(date, fechaDelSistema.getTime())==1){
+                GregorianCalendar fechaSorteo=new GregorianCalendar();
+                fechaSorteo.setTime(date);
+                SorteosFuturos nuevoSorteo=new SorteosFuturos(comboSorteos.getSelectedItem().toString(), fechaSorteo, Integer.parseInt(textPrecio.getText()));
+                listaDeSorteosPendientes.insertPriorityDateSorteo(nuevoSorteo);
+                agregarDatosTabla();  
+            }else{
+                JOptionPane.showMessageDialog(this, "Error, la fecha del sorteo es anterior a la fecha actual.");
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Error, faltan datos.");
+        }
+
     }//GEN-LAST:event_agregarSorteoPendienteActionPerformed
 
     public void agregarDatosTabla(){
@@ -168,12 +207,12 @@ public class GestionDeSorteos extends javax.swing.JDialog {
         
         
         if (listaDeSorteosPendientes.getSize()!=0){
-            DoublyLinkedNode<SorteosFuturos> nodoTemp=listaDeSorteosPendientes.getHead();
+            QueueNode<SorteosFuturos> nodoTemp=listaDeSorteosPendientes.getHead().getNextNode();
             while(nodoTemp!=null){
                 GregorianCalendar fecha = nodoTemp.getElement().getFechaSorteo();
                 String fechaSorteo=fecha.getDisplayName(7, 2, Locale.ENGLISH)+", "+fecha.get(5)+"-"+fecha.getDisplayName(2, 2, Locale.ENGLISH)+"-"+fecha.get(1);
-                model.addRow(new Object[]{nodoTemp.getElement().getTipoSorteo(),fechaSorteo, nodoTemp.getElement().getPrecio()});
-                nodoTemp=nodoTemp.getNext();
+                model.addRow(new Object[]{nodoTemp.getElement().getTipoSorteo(),fechaSorteo, nodoTemp.getElement().getPrecio(), nodoTemp.getElement().getConsecutivo()});
+                nodoTemp=nodoTemp.getNextNode();
             }   
         }
     }
@@ -227,6 +266,7 @@ public class GestionDeSorteos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel labelFecha;
     private rojeru_san.componentes.RSCalendarBeanInfo rSCalendarBeanInfo1;
     private javax.swing.JTable tablaSorteosPendientes;
     private rojeru_san.componentes.RSDateChooser textFecha;

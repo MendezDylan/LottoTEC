@@ -68,6 +68,19 @@ public class DoublyLinkedList<X>{
             size++;
         }
     }
+    
+    public void insertNode(DoublyLinkedNode<X> node) {
+        if (isEmpty()) {
+            head = node;
+            tail = head;
+            size++;
+        } else {
+            tail.setNext(node);
+            tail.getNext().setPrev(tail);
+            tail = tail.getNext();
+            size++;
+        }
+    }    
 
     /**
      * Permite consultar cualquier nodo de la lista según el elemento que
@@ -89,20 +102,6 @@ public class DoublyLinkedList<X>{
         return temp.getElement();
     }
     
-    
-    public DoublyLinkedList consultAll(X element) {
-        DoublyLinkedNode<X> temp = head;
-        DoublyLinkedList aux=new DoublyLinkedList();
-        for (int i = 0; i < size; i++) {
-            if (temp.getElement() == element) {
-                aux.insert(element);
-            }
-            else {
-                temp = temp.getNext();
-            }
-        }
-        return aux;
-    }    
     
 
     /**
@@ -140,7 +139,7 @@ public class DoublyLinkedList<X>{
     /**
      * Permite eleminar de frente
      */
-    private void frontDelete() {
+    public void frontDelete() {
         DoublyLinkedNode<X> temp = head;
         head = head.getNext();
         temp.setNext(null);

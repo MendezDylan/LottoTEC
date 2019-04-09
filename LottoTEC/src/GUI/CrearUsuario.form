@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -24,7 +24,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="572" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -36,8 +36,8 @@
                   </Group>
               </Group>
           </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel3" linkSize="1" min="-2" pref="39" max="-2" attributes="0"/>
@@ -47,74 +47,75 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel5" linkSize="1" min="-2" pref="52" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtDireccion" max="32767" attributes="0"/>
+                      <Component id="txtDireccion" linkSize="1" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel7" linkSize="1" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtCorreo" max="32767" attributes="0"/>
+                      <Component id="txtCorreo" linkSize="1" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel2" linkSize="1" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtNombre" min="-2" pref="170" max="-2" attributes="0"/>
+                      <Component id="txtNombre" linkSize="1" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel6" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtTelefono" max="32767" attributes="0"/>
+                      <Component id="txtTelefono" linkSize="1" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel4" linkSize="1" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="calendarFechaNac" linkSize="1" min="-2" pref="288" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="193" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel4" linkSize="1" min="-2" pref="100" max="-2" attributes="0"/>
-                  <Component id="calendarFechaNac" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtNombre" alignment="0" pref="43" max="32767" attributes="0"/>
-                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel4" linkSize="3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtCedula" alignment="0" pref="43" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtDireccion" alignment="0" pref="45" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtTelefono" alignment="0" pref="45" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel7" alignment="0" pref="40" max="32767" attributes="0"/>
-                          <Component id="txtCorreo" alignment="0" pref="40" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="jLabel4" pref="74" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="calendarFechaNac" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel2" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNombre" linkSize="3" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="calendarFechaNac" linkSize="3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jLabel3" linkSize="3" pref="52" max="32767" attributes="0"/>
+                  <Component id="txtCedula" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel5" linkSize="3" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                  <Component id="txtDireccion" linkSize="3" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel6" linkSize="3" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="txtTelefono" linkSize="3" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel7" linkSize="3" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="txtCorreo" linkSize="3" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="crearUsuario" min="-2" pref="41" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -164,11 +165,6 @@
         <Property name="text" type="java.lang.String" value="Correo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtCedula">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCedulaActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="txtNombre">
     </Component>
     <Component class="javax.swing.JTextField" name="txtDireccion">
@@ -178,7 +174,14 @@
         <Property name="text" type="java.lang.String" value="Nombre"/>
       </Properties>
     </Component>
-    <Component class="rojeru_san.componentes.RSCalendar" name="calendarFechaNac">
+    <Component class="rojeru_san.componentes.RSDateChooser" name="calendarFechaNac">
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtCedula">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format format="#0" subtype="-1" type="0"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

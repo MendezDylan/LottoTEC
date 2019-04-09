@@ -5,13 +5,20 @@
  */
 package GUI;
 
+import Estructuras.PriorityQueue;
 import Estructuras.DoublyLinkedList;
 import GestionarUsuario.Tiquete;
 import GestionarUsuario.Usuario;
 import GestionarUsuario.SorteosFuturos;
+import java.awt.Color;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import org.joda.time.DateTimeComparator;
 
 /**
  *
@@ -19,23 +26,41 @@ import javax.swing.JOptionPane;
  */
 public class PantallaPrincipal extends javax.swing.JFrame {
 
-    /**
+    /**DoublyLinkedL
      * Creates new form PrincipalGUI
      */
     //Aqui se crear los atributos necesarios para el funcionamiento de todo el programa.
     DoublyLinkedList<Usuario> listaDeUsuarios;
-    DoublyLinkedList<Tiquete> listaDeTiquetes;
-    DoublyLinkedList<SorteosFuturos> listaDeSorteosPendientes;
+    PriorityQueue<Tiquete> listaDeTiquetesSinEnviar;
+    PriorityQueue<Tiquete> listaDeTiquetesEnviados;
+    PriorityQueue<SorteosFuturos> listaDeSorteosPendientes;
     
-    GregorianCalendar fecha= new GregorianCalendar();
+    GregorianCalendar fechaDelSistema;
 
     public PantallaPrincipal() {
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.listaDeUsuarios=new DoublyLinkedList<>();
-        this.listaDeTiquetes=new DoublyLinkedList<>();
-        this.listaDeSorteosPendientes=new DoublyLinkedList<>();
+        this.listaDeTiquetesSinEnviar=new PriorityQueue<>();
+        this.listaDeSorteosPendientes=new PriorityQueue<>();
+        this.listaDeTiquetesEnviados=new PriorityQueue<>();
         initComponents();
-        labelFecha.setText(fecha.getDisplayName(7, 2, Locale.ENGLISH)+", "+fecha.get(5)+"-"+fecha.getDisplayName(2, 2, Locale.ENGLISH)+"-"+fecha.get(1));
-        
+        this.getContentPane().setBackground(Color.WHITE);
+        this.fechaDelSistema=new GregorianCalendar();
+        labelFecha.setText(fechaDelSistema.getDisplayName(7, 2, Locale.ENGLISH)+", "+fechaDelSistema.get(5)+"-"+fechaDelSistema.getDisplayName(2, 2, Locale.ENGLISH)+"-"+fechaDelSistema.get(1));
+    }
+
+    public GregorianCalendar getFechaDelSistema() {
+        return fechaDelSistema;
     }
 
     /**
@@ -47,19 +72,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         botonComprarTiquete = new javax.swing.JButton();
         botonRegistrarUsuario = new javax.swing.JButton();
         labelFecha = new javax.swing.JLabel();
         botonAvanzarDia = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         botonGestionSorteos = new javax.swing.JButton();
+        botonAtenderPedidos = new javax.swing.JButton();
+        botonRealizarSorteo = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setText("LottoTEC");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         botonComprarTiquete.setText("Comprar tiquetes");
         botonComprarTiquete.addActionListener(new java.awt.event.ActionListener() {
@@ -75,26 +98,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        labelFecha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labelFecha.setText("FECHA");
 
         botonAvanzarDia.setText("Siguiente dia");
         botonAvanzarDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAvanzarDiaActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("ToString Usuarios");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("ToString Tiquetes");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -105,6 +115,22 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        botonAtenderPedidos.setText("Atender pedidos");
+        botonAtenderPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAtenderPedidosActionPerformed(evt);
+            }
+        });
+
+        botonRealizarSorteo.setText("Realizar sorteo");
+        botonRealizarSorteo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRealizarSorteoActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logoPeq.jpg"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,51 +138,51 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(botonRegistrarUsuario)
+                        .addGap(343, 343, 343)
+                        .addComponent(jLabel2)
+                        .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(217, 217, 217)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelFecha)
-                                    .addComponent(botonAvanzarDia)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(botonComprarTiquete)
-                                .addGap(18, 18, 18)
-                                .addComponent(botonGestionSorteos))))
+                                .addGap(12, 12, 12)
+                                .addComponent(labelFecha))
+                            .addComponent(botonAvanzarDia, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
-                .addContainerGap(225, Short.MAX_VALUE))
+                        .addGap(105, 105, 105)
+                        .addComponent(botonRegistrarUsuario)
+                        .addGap(18, 18, 18)
+                        .addComponent(botonGestionSorteos)
+                        .addGap(18, 18, 18)
+                        .addComponent(botonComprarTiquete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botonAtenderPedidos)
+                        .addGap(18, 18, 18)
+                        .addComponent(botonRealizarSorteo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botonAtenderPedidos, botonComprarTiquete, botonGestionSorteos, botonRegistrarUsuario});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
                         .addComponent(labelFecha)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonAvanzarDia)))
-                .addGap(47, 47, 47)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonComprarTiquete)
                     .addComponent(botonRegistrarUsuario)
-                    .addComponent(botonGestionSorteos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 318, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(44, 44, 44))
+                    .addComponent(botonGestionSorteos)
+                    .addComponent(botonComprarTiquete)
+                    .addComponent(botonAtenderPedidos)
+                    .addComponent(botonRealizarSorteo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {botonAtenderPedidos, botonComprarTiquete, botonGestionSorteos, botonRealizarSorteo, botonRegistrarUsuario});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -166,7 +192,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         if (listaDeUsuarios.getSize()==0){
             JOptionPane.showMessageDialog(null, "Error, para comprar un tiquete debe haber al menos un usuario registrado.");
         }else{
-            new ComprarTiquete(this, rootPaneCheckingEnabled, listaDeUsuarios, listaDeTiquetes, listaDeSorteosPendientes).setVisible(true);
+            new ComprarTiquete(this, rootPaneCheckingEnabled, listaDeUsuarios, listaDeTiquetesSinEnviar, listaDeSorteosPendientes, fechaDelSistema).setVisible(true);
         }
     }//GEN-LAST:event_botonComprarTiqueteActionPerformed
 
@@ -178,26 +204,56 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void botonAvanzarDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAvanzarDiaActionPerformed
         // TODO add your handling code here:
         //GregorianCalendar atributos. [0]=dia semana   [1]=anno    [2]=mes   [5]dia
-        int dia=this.fecha.get(5);
-        fecha.set(5, dia+1);
-        labelFecha.setText(fecha.getDisplayName(7, 2, Locale.ENGLISH)+", "+fecha.get(5)+"-"+fecha.getDisplayName(2, 2, Locale.ENGLISH)+"-"+fecha.get(1));
+        if(listaDeTiquetesEnviados.getSize()==0 && listaDeTiquetesSinEnviar.getSize()!=0){
+            if ((DateTimeComparator.getDateOnlyInstance().compare(listaDeTiquetesSinEnviar.getHead().getNextNode().getElement().getSorteo().getFechaSorteo(), fechaDelSistema))==1){
+                int dia=this.fechaDelSistema.get(5);
+                fechaDelSistema.set(5, dia+1);
+                labelFecha.setText(fechaDelSistema.getDisplayName(7, 2, Locale.ENGLISH)+", "+fechaDelSistema.get(5)+"-"+fechaDelSistema.getDisplayName(2, 2, Locale.ENGLISH)+"-"+fechaDelSistema.get(1));            
+            }else{
+                JOptionPane.showMessageDialog(this, "No puede avanzar al siguiente dia porque hay sorteos pendientes hoy.");
+            }
+        }else if(listaDeTiquetesEnviados.getSize()!=0 && listaDeTiquetesSinEnviar.getSize()==0){
+            if (DateTimeComparator.getDateOnlyInstance().compare(listaDeTiquetesEnviados.getHead().getNextNode().getElement().getSorteo().getFechaSorteo(), fechaDelSistema)==1){
+                int dia=this.fechaDelSistema.get(5);
+                fechaDelSistema.set(5, dia+1);
+                labelFecha.setText(fechaDelSistema.getDisplayName(7, 2, Locale.ENGLISH)+", "+fechaDelSistema.get(5)+"-"+fechaDelSistema.getDisplayName(2, 2, Locale.ENGLISH)+"-"+fechaDelSistema.get(1));            
+            }else{
+                JOptionPane.showMessageDialog(this, "No puede avanzar al siguiente dia porque hay sorteos pendientes hoy.");
+            }
+        }else if(listaDeTiquetesEnviados.getSize()!=0 && listaDeTiquetesSinEnviar.getSize()!=0){
+            if (DateTimeComparator.getDateOnlyInstance().compare(listaDeTiquetesEnviados.getHead().getNextNode().getElement().getSorteo().getFechaSorteo(), fechaDelSistema)==1 && 
+                    DateTimeComparator.getDateOnlyInstance().compare(listaDeTiquetesSinEnviar.getHead().getNextNode().getElement().getSorteo().getFechaSorteo(), fechaDelSistema)==1){
+                int dia=this.fechaDelSistema.get(5);
+                fechaDelSistema.set(5, dia+1);
+                labelFecha.setText(fechaDelSistema.getDisplayName(7, 2, Locale.ENGLISH)+", "+fechaDelSistema.get(5)+"-"+fechaDelSistema.getDisplayName(2, 2, Locale.ENGLISH)+"-"+fechaDelSistema.get(1));            
+            }else{
+                JOptionPane.showMessageDialog(this, "No puede avanzar al siguiente dia porque hay sorteos pendientes hoy.");
+            }   
+        }else{
+                int dia=this.fechaDelSistema.get(5);
+                fechaDelSistema.set(5, dia+1);
+                labelFecha.setText(fechaDelSistema.getDisplayName(7, 2, Locale.ENGLISH)+", "+fechaDelSistema.get(5)+"-"+fechaDelSistema.getDisplayName(2, 2, Locale.ENGLISH)+"-"+fechaDelSistema.get(1));
+        }
     }//GEN-LAST:event_botonAvanzarDiaActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        System.out.println("\n\n*************************LISTA DE USUARIOS*************************\n"+listaDeUsuarios.toString());
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        System.out.println("\n\n*************************LISTA DE TIQUETES*************************\n"+listaDeTiquetes.toString());
-
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void botonGestionSorteosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGestionSorteosActionPerformed
         // TODO add your handling code here:
-        new GestionDeSorteos(this, rootPaneCheckingEnabled, listaDeSorteosPendientes).setVisible(true);
+        new GestionDeSorteos(this, rootPaneCheckingEnabled, listaDeSorteosPendientes, fechaDelSistema).setVisible(true);
     }//GEN-LAST:event_botonGestionSorteosActionPerformed
+
+    private void botonAtenderPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtenderPedidosActionPerformed
+        // TODO add your handling code here:
+        new AtenderPedidos(this, rootPaneCheckingEnabled, listaDeTiquetesSinEnviar, listaDeTiquetesEnviados, fechaDelSistema).setVisible(true);
+    }//GEN-LAST:event_botonAtenderPedidosActionPerformed
+
+    private void botonRealizarSorteoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRealizarSorteoActionPerformed
+        // TODO add your handling code here:
+        if(false){
+            JOptionPane.showMessageDialog(this, "No se pueden realizar sorteos porque hay tiquetes pendientes de enviar a usuarios.");
+        }else{
+            new RealizarSorteo(this, rootPaneCheckingEnabled, listaDeTiquetesEnviados, listaDeSorteosPendientes, fechaDelSistema).setVisible(rootPaneCheckingEnabled);
+        }
+    }//GEN-LAST:event_botonRealizarSorteoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,13 +292,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonAtenderPedidos;
     private javax.swing.JButton botonAvanzarDia;
     private javax.swing.JButton botonComprarTiquete;
     private javax.swing.JButton botonGestionSorteos;
+    private javax.swing.JButton botonRealizarSorteo;
     private javax.swing.JButton botonRegistrarUsuario;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel labelFecha;
     // End of variables declaration//GEN-END:variables
 }

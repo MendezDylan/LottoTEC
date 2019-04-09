@@ -23,12 +23,18 @@ public class QueueNode<X> {
 
     @Override
     public String toString() {
-        return "element=" + element;
+        return ""+element;
     }
 
     public QueueNode(X element) {
         this.element = element;
     }
+
+    public QueueNode() {
+        this.element=null;
+        this.nextNode=null;
+    }
+    
     
     
     
